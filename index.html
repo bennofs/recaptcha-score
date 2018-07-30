@@ -8,10 +8,10 @@
         <script>
          grecaptcha.ready(function() {
              grecaptcha.execute('6Le-SGcUAAAAANOUGnIjn3C3lIi0EBAIp9RWp2rb', {action: 'login'}).then(function(token) {
-                 fetch("//recaptcha-recaptcha.a3c1.starter-us-west-1.openshiftapps.com/score/" + "token", {
+                 fetch("//recaptcha-recaptcha.a3c1.starter-us-west-1.openshiftapps.com/score/" + token, {
                      method: "post"
                  }).then(response => {
-                     document.getElementById("response").innerText = response.text()
+                     response.text().then(t => document.getElementById("response").innerText = t)
                  });
              });
          });

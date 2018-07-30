@@ -10,4 +10,4 @@ app.post("/score/:token", async (req, res) => {
         response: req.params.token
     }).pipe(res)
 })
-app.listen(3000)
+app.listen(8080)

@@ -5,21 +5,24 @@
     <body>
         <code style="display:block" id="homepage"></code>
         <code style="display:block" id="login"></code>
+        <button id="login" onclick="dologin()"></button>
         <script src="https://www.google.com/recaptcha/api.js?render=6Le-SGcUAAAAANOUGnIjn3C3lIi0EBAIp9RWp2rb"></script>
         <script>
+         function dologin() {
+             grecaptcha.execute('6Le-SGcUAAAAANOUGnIjn3C3lIi0EBAIp9RWp2rb', {action: 'login'}).then(function(token) {
+                 fetch("//recaptcha-recaptcha.a3c1.starter-us-west-1.openshiftapps.com/score/" + token, {
+                     method: "post"
+                 }).then(response => {
+                     response.text().then(t => document.getElementById("login").innerText = t)
+                 });
+             });
+         };
          grecaptcha.ready(function() {
              grecaptcha.execute('6Le-SGcUAAAAANOUGnIjn3C3lIi0EBAIp9RWp2rb', {action: 'homepage'}).then(function(token) {
                  fetch("//recaptcha-recaptcha.a3c1.starter-us-west-1.openshiftapps.com/score/" + token, {
                      method: "post"
                  }).then(response => {
                      response.text().then(t => document.getElementById("homepage").innerText = t)
-                 });
-             });
-             grecaptcha.execute('6Le-SGcUAAAAANOUGnIjn3C3lIi0EBAIp9RWp2rb', {action: 'login'}).then(function(token) {
-                 fetch("//recaptcha-recaptcha.a3c1.starter-us-west-1.openshiftapps.com/score/" + token, {
-                     method: "post"
-                 }).then(response => {
-                     response.text().then(t => document.getElementById("login").innerText = t)
                  });
              });
          });
